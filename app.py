@@ -1,12 +1,15 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
+import os
 
 # -------------------------
 # API Keys
 # -------------------------
-FOURSQUARE_API_KEY = "YOUR_FSQ_API_KEY"  # replace with your key
-ORS_API_KEY = "YOUR_ORS_API_KEY"         # optional, for isochrones
+
+FOURSQUARE_API_KEY = os.environ.get("FOURSQUARE_API_KEY")
+ORS_API_KEY = os.environ.get("ORS_API_KEY")
+
 
 # -------------------------
 # Isochrone generator (ORS)
@@ -118,3 +121,4 @@ def get_venues():
 if __name__ == "__main__":
     # IMPORTANT: For deployment use Gunicorn, not app.run()
     app.run(host="0.0.0.0", port=5000, debug=True)
+
